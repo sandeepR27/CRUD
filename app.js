@@ -6,10 +6,11 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
- app.use(express.json());
+app.use(cors());
+app.use(express.json());
 
 // MongoDB Atlas Connection
-const MONGODB_URI =  'mongodb+srv://sandeeprrk27:Ab12345@airbnb.vgwtbrw.mongodb.net/CRUD?retryWrites=true&w=majority&appName=airbnb';
+const MONGODB_URI = 'mongodb+srv://sandeeprrk27:Ab12345@airbnb.vgwtbrw.mongodb.net/CRUD?retryWrites=true&w=majority&appName=airbnb';
 
 mongoose.connect(MONGODB_URI)
   .then(() => console.log('Connected to MongoDB Atlas'))

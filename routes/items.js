@@ -36,12 +36,29 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Update an item
+// Update an item (full update)
 router.put('/:id', async (req, res) => {
   try {
     const item = await Item.findByIdAndUpdate(
       req.params.id,
       req.body,
+      { new: true, runValidators: true }
+    );
+    if (!item) {
+      return res.status(404).json({ message: 'Item not found' });
+    }
+    res.json(item);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// Partially update an item
+router.patch('/:id', async (req, res) => {
+  try {
+    const item = await Item.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
       { new: true, runValidators: true }
     );
     if (!item) {
