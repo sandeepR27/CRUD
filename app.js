@@ -19,7 +19,6 @@ mongoose.connect(MONGODB_URI)
 // Routes
 const itemRoutes = require('./routes/items');
 app.use('/api/items', itemRoutes);
- im
 
 // Error handling middleware
 app.use((err, req, res, next) => {
